@@ -1,0 +1,29 @@
+# virtual environemt
+/.venv/
+/.env/
+/venv/
+/env/
+
+# ide configs
+/.vscode/
+/.idea/
+
+# emacs cache and backup files
+\#*
+*~
+
+# temporary files storage
+/temp/
+/tmp/
+
+# documentation builds
+_builds/
+_build/
+builds/
+build/
+
+# translation object files
+*.pot
+*.mo
+
+__pycache__/
