@@ -5,6 +5,4 @@ INITIAL_PLAYER_SCORE = 0
 SCORE_SUCCESS_ATTACK = 2
 SCORE_DRAW_ATTACK = 1
 
-ITEMS = ['witch', 'thief', 'knight']
-RESULT_FIGHTS = ['win', 'loose', 'draw']
 

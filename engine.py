@@ -1,27 +1,24 @@
-import models as models
-import setting as setting
+import models
+import setting
 
 
 def get_player_name() -> str:
-    name = str(input('Please input your name ')).strip()
-    if name:
-        return name
-    else:
-        print('Write smth')
-        get_player_name()
+    name = ''
+    while not name:
+        name = str(input('Please input your name ')).strip()
+    return name
 
 
 def play() -> None:
     enemy = models.Enemy(level=setting.INITIAL_ENEMY_LEVEL, health=setting.INITIAL_ENEMY_HEALTH)
-    player = models.Player(name=get_player_name, health=setting.INITIAL_PLAYER_HEALTH,
+    player = models.Player(name=get_player_name(), health=setting.INITIAL_PLAYER_HEALTH,
                            score=setting.INITIAL_PLAYER_SCORE, result_fight=0)
     game_round = 0
     while True:
         player.attack(enemy)
         game_round += 1
         print('round = ', game_round)
-        while player.result_fight == setting.RESULT_FIGHTS[0]:
-            print('player.result_fight = ', player.result_fight)
+        while player.result_fight == 'win':
             enemy.level += 1
             game_round += 1
             print('round = ', game_round)
@@ -32,7 +29,6 @@ def play() -> None:
 
 
 if __name__ == '__main__':
-    get_player_name()
     try:
         play()
     except KeyboardInterrupt:
