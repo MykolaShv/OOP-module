@@ -15,17 +15,16 @@ def play() -> None:
                            score=setting.INITIAL_PLAYER_SCORE, result_fight=0)
     game_round = 0
     while True:
-        player.attack(enemy)
-        game_round += 1
-        print('round = ', game_round)
-        while player.attack == 'win' or player.defence == 'win':
-            enemy.level += 1
+        try:
+            player.attack(enemy)
             game_round += 1
             print('round = ', game_round)
+            player.defence(enemy)
+            print('round = ', game_round)
+        except player.attack(enemy) == 'win':
             player.attack(enemy)
-        player.defence(enemy)
-        game_round += 1
-        print('round = ', game_round)
+            game_round += 1
+            print('round = ', game_round)
 
 
 if __name__ == '__main__':
