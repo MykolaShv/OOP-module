@@ -5,7 +5,7 @@ import setting
 def get_player_name() -> str:
     name = ''
     while not name:
-        name = str(input('Please input your name ')).strip()
+        name = input('Please input your name ').strip()
     return name
 
 
@@ -18,7 +18,7 @@ def play() -> None:
         player.attack(enemy)
         game_round += 1
         print('round = ', game_round)
-        while player.result_fight == 'win':
+        while player.attack == 'win' or player.defence == 'win':
             enemy.level += 1
             game_round += 1
             print('round = ', game_round)

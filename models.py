@@ -30,36 +30,37 @@ class Player:
         self.result_fight = result_fight
 
     def attack(self, enemy: Enemy) -> None:
-        result_fight = self.fight(self.select_attack(), enemy.select_defence())
-        if result_fight == 'win':
+        attack = self.select_attack()
+        defence = enemy.select_defence()
+        self.result_fight = self.fight(attack, defence)
+        print('result_fight: ', self.result_fight)
+        if self.result_fight == 'win':
             enemy.decrease_health()
             self.score += setting.SCORE_SUCCESS_ATTACK
             print('YOUR ATTACK IS SUCCESSFUL!')
-        elif result_fight == 'loose':
-            self.decrease_health()
+        elif self.result_fight == 'loose':
             print('YOUR ATTACK IS FAILED!')
-        elif result_fight == 'draw':
-            self.score += setting.SCORE_DRAW_ATTACK
+        elif self.result_fight == 'draw':
             print('IT’S A DRAW!')
 
     def decrease_health(self) -> None:
         self.health -= 1
         if self.health <= 0:
             with open('result.txt', 'a') as f:
-                f.write(str(self.name) + 'has score: ' + str(self.score) + '\n')
+                f.write(str(self.name) + ' has score: ' + str(self.score) + '\n')
             raise exceptions.GameOver(self.name, self.score)
 
     def defence(self, enemy: Enemy) -> None:
-        self.result_fight = self.fight(self.select_defence(), enemy.select_attack())
+        attack = enemy.select_attack()
+        defence = self.select_defence()
+        self.result_fight = self.fight(attack, defence)
+        print('result_fight: ', self.result_fight)
         if self.result_fight == 'win':
             enemy.decrease_health()
-            self.score += setting.SCORE_SUCCESS_ATTACK
             print('YOUR DEFENCE IS SUCCESSFUL!')
         elif self.result_fight == 'loose':
-            self.decrease_health()
             print('YOUR DEFENCE IS FAILED!')
         elif self.result_fight == 'draw':
-            self.score += setting.SCORE_DRAW_ATTACK
             print('IT’S A DRAW!')
 
     @staticmethod
@@ -75,13 +76,15 @@ class Player:
     def select_attack() -> int:
         choice = 0
         while choice not in ('1', '2', '3'):
-            choice = input('Please make your choice to defend, it must be 1,2 or 3 ')
+            choice = input('Please make your choice to defend, it must be 1,2 or 3 \n \
+            WIZARD  = 1, THIEF = 2,  KNIGHT = 3 ')
         return int(choice)
 
     @staticmethod
     def select_defence() -> int:
         choice = 0
         while choice not in ('1', '2', '3'):
-            choice = input('Please make your choice to defend, it must be 1,2 or 3 ')
+            choice = input('Please make your choice to defend, it must be 1,2 or 3 \n \
+            WIZARD  = 1, THIEF = 2,  KNIGHT = 3 ')
         return int(choice)
 
