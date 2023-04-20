@@ -16,15 +16,17 @@ def play() -> None:
                            score=setting.INITIAL_PLAYER_SCORE, result_fight=0)
     game_round = 0
     while True:
-        player.attack(enemy)
-        game_round += 1
-        print('round = ', game_round)
-        if exceptions.EnemyDown:
+        try:
+            player.attack(enemy)
+            game_round += 1
+            print('round = ', game_round)
             player.defence(enemy)
             game_round += 1
             print('round = ', game_round)
-        else:
-            pass
+        except exceptions.EnemyDown:
+            enemy = models.Enemy(enemy.level + 1, enemy.health)
+        except exceptions.GameOver:
+            break
 
 
 if __name__ == '__main__':
