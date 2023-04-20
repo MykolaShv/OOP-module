@@ -11,7 +11,8 @@ class Enemy:
     def decrease_health(self) -> None:
         self.health -= 1
         if self.health <= 0:
-            raise exceptions.EnemyDown(self.level)
+            print('The level of enemy is', self.level)
+            raise exceptions.EnemyDown
 
     @staticmethod
     def select_attack() -> int:
@@ -48,7 +49,8 @@ class Player:
         if self.health <= 0:
             with open('result.txt', 'a') as f:
                 f.write(str(self.name) + ' has score: ' + str(self.score) + '\n')
-            raise exceptions.GameOver(self.name, self.score)
+            print('The score of' + str(self.name) + ' is ' + str(self.score))
+            raise exceptions.GameOver
 
     def defence(self, enemy: Enemy) -> None:
         attack = enemy.select_attack()
