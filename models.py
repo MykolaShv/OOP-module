@@ -38,11 +38,14 @@ class Player:
         if self.result_fight == 'win':
             enemy.decrease_health()
             self.score += setting.SCORE_SUCCESS_ATTACK
-            print('YOUR ATTACK IS SUCCESSFUL!')
+            print('YOUR ATTACK IS SUCCESSFUL!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
         elif self.result_fight == 'loose':
-            print('YOUR ATTACK IS FAILED!')
+            print('YOUR ATTACK IS FAILED!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
         elif self.result_fight == 'draw':
-            print('IT’S A DRAW!')
+            print('IT’S A DRAW!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
 
     def decrease_health(self) -> None:
         self.health -= 1
@@ -59,11 +62,15 @@ class Player:
         print('result_fight: ', self.result_fight)
         if self.result_fight == 'win':
             enemy.decrease_health()
-            print('YOUR DEFENCE IS SUCCESSFUL!')
+            print('YOUR DEFENCE IS SUCCESSFUL!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
         elif self.result_fight == 'loose':
-            print('YOUR DEFENCE IS FAILED!')
+            self.decrease_health()
+            print('YOUR DEFENCE IS FAILED!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
         elif self.result_fight == 'draw':
-            print('IT’S A DRAW!')
+            print('IT’S A DRAW!', 'enemy_health', enemy.health,
+                  'my_health', self.health)
 
     @staticmethod
     def fight(attack, defence) -> str:

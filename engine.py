@@ -1,5 +1,6 @@
 import models
 import setting
+import exceptions
 
 
 def get_player_name() -> str:
@@ -15,16 +16,15 @@ def play() -> None:
                            score=setting.INITIAL_PLAYER_SCORE, result_fight=0)
     game_round = 0
     while True:
-        try:
-            player.attack(enemy)
-            game_round += 1
-            print('round = ', game_round)
+        player.attack(enemy)
+        game_round += 1
+        print('round = ', game_round)
+        if exceptions.EnemyDown:
             player.defence(enemy)
-            print('round = ', game_round)
-        except player.attack(enemy) == 'win':
-            player.attack(enemy)
             game_round += 1
             print('round = ', game_round)
+        else:
+            pass
 
 
 if __name__ == '__main__':
